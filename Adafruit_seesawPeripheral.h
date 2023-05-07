@@ -180,6 +180,13 @@ void requestEvent(void);
 void Adafruit_seesawPeripheral_run(void);
 void Adafruit_seesawPeripheral_changedGPIO(void);
 
+#if CONFIG_CUSTOM_HOOKS
+/** Called when data is received and not handled by built-in Seesaw peripherals. Return `true` if handled by your custom hooks. */
+bool Adafruit_seesawPeripheral_customReceiveHook(void);
+/** Called when data is requested and not handled by built-in Seesaw peripherals. Return `true` if handled by your custom hooks. */
+bool Adafruit_seesawPeripheral_customRequestHook(void);
+#endif
+
 /****************************************************** global state */
 
 #if CONFIG_FHT && defined(MEGATINYCORE)
@@ -236,13 +243,6 @@ volatile int32_t g_enc_value[CONFIG_NUM_ENCODERS];
 volatile int32_t g_enc_delta[CONFIG_NUM_ENCODERS];
 volatile uint8_t g_enc_prev_pos[CONFIG_NUM_ENCODERS];
 volatile uint8_t g_enc_flags[CONFIG_NUM_ENCODERS];
-
-#endif
-
-#if CONFIG_CUSTOM_HOOKS
-
-bool Adafruit_seesawPeripheral_customReceiveHook();
-bool Adafruit_seesawPeripheral_customRequestHook();
 
 #endif
 
@@ -515,6 +515,12 @@ uint32_t Adafruit_seesawPeripheral_readBulk(uint32_t validpins = VALID_GPIO) {
 void Adafruit_seesawPeripheral_write32(uint32_t value) {
   Wire.write(value >> 24);
   Wire.write(value >> 16);
+  Wire.write(value >> 8);
+  Wire.write(value);
+  return;
+}
+
+void Adafruit_seesawPeripheral_write16(uint16_t value) {
   Wire.write(value >> 8);
   Wire.write(value);
   return;
