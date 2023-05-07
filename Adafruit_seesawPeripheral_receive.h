@@ -313,7 +313,7 @@ void receiveEvent(int howMany) {
 #endif
 
 #if CONFIG_CUSTOM_HOOKS
-  else if (Adafruit_seesawPeripheral_customReceiveHook() {
+  else if (Adafruit_seesawPeripheral_customReceiveHook()) {
     // No-op - handled by custom hook
   }
 #endif

@@ -108,7 +108,7 @@ void requestEvent(void) {
 #endif
 
 #if CONFIG_CUSTOM_HOOKS
-  else if (Adafruit_seesawPeripheral_customRequestHook() {
+  else if (Adafruit_seesawPeripheral_customRequestHook()) {
     // No-op - handled by custom hook
   }
 #endif
