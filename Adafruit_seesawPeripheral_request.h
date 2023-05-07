@@ -107,6 +107,12 @@ void requestEvent(void) {
   }
 #endif
 
+#if CONFIG_CUSTOM_HOOKS
+  else if (Adafruit_seesawPeripheral_customRequestHook() {
+    // No-op - handled by custom hook
+  }
+#endif
+
   else {
     SEESAW_DEBUG(F("Unhandled cmd 0x"));
     SEESAW_DEBUGLN(base_cmd, HEX);

@@ -239,6 +239,13 @@ volatile uint8_t g_enc_flags[CONFIG_NUM_ENCODERS];
 
 #endif
 
+#if CONFIG_CUSTOM_HOOKS
+
+bool Adafruit_seesawPeripheral_customReceiveHook();
+bool Adafruit_seesawPeripheral_customRequestHook();
+
+#endif
+
 /****************************************************** code */
 
 // global address
